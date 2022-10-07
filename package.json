@@ -2,17 +2,19 @@
   "name": "myzone-ws-server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "WSServer.js",
   "scripts": {
     "devStart": "nodemon",
-    "start": "node server.js"
+    "start": "node WSServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
-    "socket.io": "^4.5.1"
+    "cors": "^2.8.5",
+    "mysql2": "^2.3.3",
+    "ws": "^8.9.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
