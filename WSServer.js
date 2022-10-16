@@ -3,7 +3,6 @@ const socketServer = new WebSocket.Server({ port: 4030 });
 const UserModel = require('./models/User.model')
 let socketClients = new Map()
 socketServer.on('connection', (socket) => {
-    console.log("here")
     socket.on('message', (data) => {
         let message = JSON.parse(data.toString())
         const { body } = message
@@ -26,13 +25,9 @@ socketServer.on('connection', (socket) => {
 
     })
     socket.on('close', e => {
-        console.log('disconnected', socket.Id)
         socketClients.delete(socket.Id * 1)
         UserModel.setWebSocketId(socket.Id, 0)
     })
 
 })
 
-socketServer.on('close', (e) => {
-    console.log(e)
-})
