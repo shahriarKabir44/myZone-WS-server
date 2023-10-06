@@ -1,7 +1,13 @@
 const WebSocket = require('ws')
 const socketServer = new WebSocket.Server({ port: 4030 });
-const UserModel = require('./models/User.model')
+const UserModel = require('./models/User.model');
+const { initConnection } = require('./utils/db');
 let socketClients = new Map()
+require('dotenv').config({
+    path: './.env'
+})
+
+initConnection(process.env)
 socketServer.on('connection', (socket) => {
     socket.on('message', (data) => {
         let message = JSON.parse(data.toString())
