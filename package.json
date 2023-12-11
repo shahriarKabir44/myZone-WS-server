@@ -5,7 +5,7 @@
   "main": "WSServer.js",
   "scripts": {
     "dev": "nodemon",
-    "start": "node WSServer.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

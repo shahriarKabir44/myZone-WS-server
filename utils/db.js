@@ -11,7 +11,8 @@ function initConnection(env) {
         user: env.dbUser,
         password: env.dbPassword,
         database: env.dbName,
-        port: 3306
+        port: env.dbPort,
+        ssl: JSON.parse(env.ssl)
     })
     connectionObj.connect()
     connection.connection = connectionObj

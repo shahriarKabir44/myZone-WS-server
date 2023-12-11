@@ -4,7 +4,7 @@ const UserModel = require('./models/User.model');
 const { initConnection } = require('./utils/db');
 let socketClients = new Map()
 require('dotenv').config({
-    path: './.env'
+    path: './.env.prod'
 })
 
 initConnection(process.env)
