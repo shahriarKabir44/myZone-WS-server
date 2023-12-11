@@ -1,5 +1,5 @@
 const WebSocket = require('ws')
-const socketServer = new WebSocket.Server({ port: 4030 });
+const socketServer = new WebSocket.Server({ port: process.env.PORT || 4020 });
 const UserModel = require('./models/User.model');
 const { initConnection } = require('./utils/db');
 let socketClients = new Map()
