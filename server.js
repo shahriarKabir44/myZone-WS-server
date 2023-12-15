@@ -1,5 +1,18 @@
-const WebSocket = require('ws')
-const socketServer = new WebSocket.Server({ port: process.env.PORT || 4020 });
+
+const express = require('express');
+const http = require('http');
+const WebSocket = require('ws');
+
+
+
+
+
+const app = express();
+
+const server = http.createServer(app);
+
+const wss = new WebSocket.Server({ server });
+
 const UserModel = require('./models/User.model');
 const { initConnection } = require('./utils/db');
 let socketClients = new Map()
@@ -8,7 +21,7 @@ require('dotenv').config({
 })
 
 initConnection(process.env)
-socketServer.on('connection', (socket) => {
+wss.on('connection', (socket) => {
     socket.on('message', (data) => {
         let message = JSON.parse(data.toString())
         const { body } = message
@@ -36,4 +49,9 @@ socketServer.on('connection', (socket) => {
     })
 
 })
-
+app.get('/', (req, res) => {
+    res.send({ data: "running" })
+})
+server.listen(process.env.PORT || 4020, () => {
+    console.log(`Server started on port ${server.address().port}`);
+});
