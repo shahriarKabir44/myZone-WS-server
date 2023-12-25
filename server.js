@@ -4,21 +4,23 @@ const http = require('http');
 const WebSocket = require('ws');
 
 
-
-
-
 const app = express();
 
 const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
+const commands = process.argv.filter((item, index) => index > 1)
+
+if (commands[0] == 'dev') {
+    require('dotenv').config({
+        path: './.env.prod'
+    })
+
+}
 const UserModel = require('./models/User.model');
 const { initConnection } = require('./utils/db');
 let socketClients = new Map()
-require('dotenv').config({
-    path: './.env.prod'
-})
 
 initConnection(process.env)
 wss.on('connection', (socket) => {
